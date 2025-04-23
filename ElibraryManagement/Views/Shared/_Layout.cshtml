@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ElibraryManagement</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ElibraryManagement.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/fontawesome.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/dattables/css/datatables.datatables.min.css" asp-append-version="true" />
+    
+</head>
+<body>
+   <div class="d-flex flex-column min-vh-100">
+       <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img src="~/images/icono de libreria.jpg" width="50" height="50" class="me-2" />
+                    Booker</a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+
+
+                <div class="collapse navbar-collapse" id="navbarContent">
+
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item active">
+                                <a class="nav-link" href="@Url.Action("Index", "Libros")">Ver Libros</a>
+                        </li>
+                        <li class="nav-item active">
+                             <a class="nav-link" aria-current="page" href="@Url.Action("Index", "AboutUs")">Sobre Nosotros</a>
+                        </li>
+                        <li class="nav-item active">
+                                <a class="nav-link" href="@Url.Action("Index", "ReadingClub")">Club de Lectura</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="@Url.Action("Index", "ContactUs")">Contactanos</a>
+                        </li>
+                    </ul>
+
+
+                        @{
+                            var nombreUsuario = Context.Session.GetString("NombreUsuario");
+                            var usuarioId = Context.Session.GetInt32("UsuarioId");
+                        }
+
+                        <ul class="navbar-nav ms-auto">
+                            @if (!string.IsNullOrEmpty(nombreUsuario))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                        <i class="fa-solid fa-user me-2"></i> @nombreUsuario
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="LogInController1" asp-action="Logout">
+                                                <i class="fa-solid fa-right-from-bracket me-2"></i> Cerrar Sesión
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                        <i class="fa-solid fa-users-between-lines me-2"></i> Acceder
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="@Url.Action("Index", "LogInController1")">Iniciar Sesión</a></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("Index", "SignUp")">Registrarme</a></li>
+                                    </ul>
+                                </li>
+                            }
+
+                            <!-- Modo Oscuro Toggle -->
+                            <li class="nav-item">
+                                <button id="darkModeToggle" class="btn btn-outline-secondary btn-sm ms-3">
+                                    🌙 Dark Mode
+                                </button>
+                            </li>
+                        </ul>
+
+
+                </div>
+            </div>   
+        </nav>
+    </header>
+
+    <!-- ESTE ES EL RENDER DEL BODY, LO QUE SE VE EN EL CENTRO DE LA PAGINA-->
+
+    <div class="flex-fill">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-1">© 2025 Booker. Todos los derechos reservados.</p>
+            <p class="mb-0">
+                <a href="#" class="text-white text-decoration-none me-3">Política de Privacidad</a>
+                    <a href="@Url.Action("Index", "Terms")" class="text-white text-decoration-none">Términos de Uso</a>
+            </p>
+        </div>
+    </footer>
+
+
+    <!--  Bootstrap JS -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/bootstrap/dist/js/popper.min.js"></script>
+
+
+    <!--  Bootstrap Bundle JS -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!--  FontAwesome JS -->
+    <script src="~/lib/fontawesome/js/all.js" asp-append-version="true"></script>
+
+    <!--  jQuery Validation -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <!--MODO OSCURO EN Site.js-->
+    <script>
+        const toggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        // Cargar estado anterior
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            body.classList.add('dark-mode');
+        }
+
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        localStorage.setItem('dark-mode', isDark ? 'enabled' : 'disabled');
+        });
+    </script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</div>
+
+
+    <!--STYLE DE EMERGENCIA PARA CENTRAR NAVBAR-->
+
+
+    <style>
+        .navbar-nav.mx-auto {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+
+
+</body>
+</html>

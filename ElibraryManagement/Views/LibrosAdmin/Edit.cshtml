@@ -1,0 +1,55 @@
+﻿@model ElibraryManagement.Models.Libro
+@{
+    ViewData["Title"] = "Editar Libro";
+}
+
+<h2>Editar Libro</h2>
+
+<form method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="Titulo">Título</label>
+        <input type="text" name="Titulo" class="form-control" value="@Model.Titulo" required />
+    </div>
+    
+    <div class="form-group">
+        <label for="Autor">Autor</label>
+        <input type="text" name="Autor" class="form-control" value="@Model.Autor" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Categoria">Categoría</label>
+        <input type="text" name="Categoria" class="form-control" value="@Model.Categoria" required />
+    </div>
+
+    <div class="form-group">
+        <label for="IdInstitucion">Institución</label>
+        <select name="IdInstitucion" class="form-control">
+            @foreach (var institucion in ViewBag.Instituciones)
+            {
+                <option value="@institucion.IdInstitucion"
+                        selected="@((institucion.IdInstitucion == Model.IdInstitucion) ? "selected" : "")">
+                    @institucion.Nombre
+                </option>
+
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Portada">Portada</label>
+        <input type="file" name="portada" class="form-control" />
+        @if (!string.IsNullOrEmpty(Model.Portada))
+        {
+            <p><strong>Portada actual:</strong></p>
+            <img src="~/portadas/@Model.Portada" alt="Portada" style="max-width: 150px;" />
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+</form>
+
+@{
+    ViewData["VolverUrl"] = Url.Action("Index", "LibrosAdmin");
+}
+@await Html.PartialAsync("_BotonVolver")

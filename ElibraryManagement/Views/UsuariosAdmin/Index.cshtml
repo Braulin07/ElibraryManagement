@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewData["Title"] = "Ver Usuarios";
+}
+
+<div class="container mt-4">
+    <h2>👤 Ver Usuarios</h2>
+
+
+    <div class="mb-3">
+        <a asp-action="Create" class="btn btn-success">➕ Agregar Nuevo Usuario</a>
+    </div>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Rol</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vm in Model)
+            {
+                <tr>
+                    <td>
+                        @if (vm.EsAdmin)
+                        {
+                            <span class="badge bg-success">Administrador</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Usuario</span>
+                        }
+                    </td>
+                    <td>@vm.Usuario.NombreCompleto</td>
+                    <td>@vm.Usuario.CorreoElectronico</td>
+                    <td>@(vm.Usuario.IsActive ? "Activo" : "Inactivo")</td>
+                    <td>
+                        @if (!vm.Usuario.IsActive)
+                        {
+                            <form method="post" asp-action="Habilitar" asp-route-id="@vm.Usuario.IdUsuario" class="d-inline">
+                                <button type="submit" class="btn btn-success btn-sm">Habilitar</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form method="post" asp-action="Inhabilitar" asp-route-id="@vm.Usuario.IdUsuario" class="d-inline">
+                                <button type="submit" class="btn btn-warning btn-sm">Inhabilitar</button>
+                            </form>
+                            @if (!vm.EsAdmin)
+                            {
+                                <form method="post" asp-action="Ascender" asp-route-id="@vm.Usuario.IdUsuario" class="d-inline">
+                                    <button type="submit" class="btn btn-primary btn-sm">Ascender a Admin</button>
+                                </form>
+                            }
+                        }
+
+                        <a asp-action="Edit" asp-route-id="@vm.Usuario.IdUsuario" class="btn btn-info btn-sm">Editar</a>
+
+                        @if (!vm.EsAdmin)
+                        {
+                            <form method="post" asp-action="Eliminar" asp-route-id="@vm.Usuario.IdUsuario" class="d-inline" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este usuario permanentemente?');">
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@{
+    ViewData["VolverUrl"] = Url.Action("Index", "Administradores");
+}
+@await Html.PartialAsync("_BotonVolver")
+

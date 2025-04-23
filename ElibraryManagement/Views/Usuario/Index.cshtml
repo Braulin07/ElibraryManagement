@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Bienvenido a Booker";
+}
+
+<style>
+    /* Estilo general para las tarjetas */
+    .card-deck {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        justify-content: flex-start; /* Asegura que las tarjetas se alineen a la izquierda */
+    }
+
+    .card {
+        width: 18rem; /* Tamaño fijo de las tarjetas */
+        height: auto; /* Ajusta la altura automáticamente */
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        background-color: #fff;
+    }
+
+        .card img {
+            height: 220px; /* Ajusta la altura de la imagen */
+            object-fit: cover; /* Hace que la imagen cubra el área sin distorsionarse */
+        }
+
+    .card-body {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 0.5rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden; /* Asegura que el título no se desborde */
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 1rem; /* Da un pequeño espacio entre el autor y el botón */
+    }
+
+    .card-link {
+        background-color: #6c63ff;
+        color: white;
+        border-radius: 5px;
+        padding: 10px;
+        text-align: center;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .card-link:hover {
+            background-color: #574ee0;
+        }
+
+    /* Mejorar la visibilidad en móvil */
+ 
+    }
+</style>
+
+@model List<Libro>
+
+<h2 class="mb-4">📚 Libros Disponibles</h2>
+
+<!-- Barra de búsqueda -->
+<div class="search-container">
+    <input type="text" id="searchBar" class="search-input" placeholder="Buscar libro por título o autor..." />
+</div>
+
+<!-- Contenedor de libros -->
+<div class="card-deck">
+    @foreach (var libro in Model)
+    {
+        <div class="card">
+            <img src="@Url.Content("~/portadas/" + libro.Portada)" class="card-img-top" alt="@libro.Titulo" />
+            <div class="card-body">
+                <h5 class="card-title">@libro.Titulo</h5>
+                <p class="card-text"> @libro.Autor</p>
+                <a asp-action="Leer" asp-route-id="@libro.IdLibro" class="btn btn-primary card-link">Leer</a>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    // Funcionalidad para la barra de búsqueda
+    document.getElementById("searchBar").addEventListener("input", function () {
+        const searchTerm = this.value.toLowerCase();
+        const bookCards = document.querySelectorAll(".book-card");
+
+        bookCards.forEach(function (card) {
+            const title = card.querySelector(".card-title").textContent.toLowerCase();
+            const author = card.querySelector(".card-text").textContent.toLowerCase();
+
+            if (title.includes(searchTerm) || author.includes(searchTerm)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    });
+</script>
+
+
+
+

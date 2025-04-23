@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewData["Title"] = "Sign Up";
+}
+
+<style>
+    .register-container {
+        background-color: #fff;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .register-container:hover {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transform: scale(1.01);
+        }
+
+    .form-control:focus {
+        border-color: #6c63ff;
+        box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.25);
+    }
+
+    .btn-register {
+        background-color: #6c63ff;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-register:hover {
+            background-color: #574ee0;
+        }
+
+    .register-title {
+        font-weight: 700;
+        color: #333;
+    }
+
+    .register-subtext {
+        font-size: 0.9rem;
+        color: #888;
+    }
+</style>
+
+<div class="container d-flex align-items-center justify-content-center vh-100">
+    <div class="register-container w-100" style="max-width: 450px;">
+        <h3 class="text-center register-title mb-3">Crea tu cuenta en <span class="text-primary">Booker</span></h3>
+        <p class="text-center register-subtext mb-4">Regístrate para comenzar a explorar</p>
+
+        <form method="post" asp-controller="Account" asp-action="Register">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre completo</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Tu nombre" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="ejemplo@correo.com" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="********" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="********" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="birthdate" class="form-label">Fecha de nacimiento</label>
+                <input type="date" class="form-control" id="birthdate" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="phone" class="form-label">Número de teléfono</label>
+                <input type="tel" class="form-control" id="phone" placeholder="(809) 000-0000" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="gender" class="form-label">Sexo</label>
+                <select class="form-select" id="gender" required>
+                    <option selected disabled value="">Seleccione una opción</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-register w-100 text-white">Registrarme</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <small>¿Ya tienes una cuenta? <a href="@Url.Action("Index", "LogInController1")" class="text-decoration-none">Inicia sesión aquí</a></small>
+        </div>
+    </div>
+</div>
+
+

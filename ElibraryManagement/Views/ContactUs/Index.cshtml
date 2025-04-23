@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Contact Us Page -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="row shadow-lg rounded-4 overflow-hidden">
+                <!-- FORMULARIO DE CONTACTO -->
+                <div class="col-md-6 bg-white p-5">
+                    <h3 class="mb-4 text-primary">Contáctanos</h3>
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control rounded-3" id="nombre" placeholder="Tu nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control rounded-3" id="apellido" placeholder="Tu apellido">
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control rounded-3" id="correo" placeholder="ejemplo@correo.com">
+                        </div>
+                        <div class="mb-4">
+                            <label for="razon" class="form-label">Razón de contacto</label>
+                            <textarea class="form-control rounded-3" id="razon" rows="4" placeholder="Cuéntanos cómo podemos ayudarte"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 rounded-3">Enviar mensaje</button>
+                    </form>
+                </div>
+
+                <!-- PREGUNTAS FRECUENTES -->
+                <div class="col-md-6 bg-light p-5">
+                    <h4 class="mb-4 text-primary">Preguntas Frecuentes</h4>
+
+                    <div class="mb-4">
+                        <h6 class="fw-bold">¿Cómo puedo registrarme como institución?</h6>
+                        <p class="text-muted">Dirígete a la sección “Registrarse” y selecciona la opción de institución para completar el formulario con tus datos.</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="fw-bold">¿Puedo acceder a libros sin iniciar sesión?</h6>
+                        <p class="text-muted">Algunas vistas públicas están disponibles, pero para acceder a libros necesitas iniciar sesión.</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="fw-bold">¿Qué pasa si olvidé mi contraseña?</h6>
+                        <p class="text-muted">Puedes usar el enlace “¿Olvidaste tu contraseña?” en la pantalla de inicio de sesión para recuperarla.</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="fw-bold">¿El servicio tiene algún costo?</h6>
+                        <p class="text-muted">No, nuestra plataforma es completamente gratuita para estudiantes y lectores registrados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="map-responsive mt-4">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d236.52276240922018!2d-69.97590163320838!3d18.46715521567765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sdo!4v1744597152450!5m2!1sen!2sdo"
+             style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
+
+<style>
+    .map-responsive {
+        overflow: hidden;
+        padding-bottom: 30%;
+        position: relative;
+        height: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .map-responsive iframe {
+            position: absolute;
+            width: 80%; /* Ajusta según el tamaño deseado */
+            height: 100%; /* O pon un valor fijo si prefieres */
+            border: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+</style>
+

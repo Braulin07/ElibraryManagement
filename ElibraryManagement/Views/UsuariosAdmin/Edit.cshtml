@@ -1,0 +1,55 @@
+﻿@model ElibraryManagement.Models.Usuario
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">✏️ Editar Usuario</h2>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="IdUsuario" />
+
+        <div class="mb-3">
+            <label asp-for="NombreCompleto" class="form-label">Nombre Completo</label>
+            <input asp-for="NombreCompleto" class="form-control" />
+            <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CorreoElectronico" class="form-label">Correo Electrónico</label>
+            <input asp-for="CorreoElectronico" class="form-control" />
+            <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Telefono" class="form-label">Teléfono</label>
+            <input asp-for="Telefono" class="form-control" />
+            <span asp-validation-for="Telefono" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IsActive" class="form-label">Estado</label>
+            <select asp-for="IsActive" class="form-select">
+                <option value="true">Activo</option>
+                <option value="false">Inactivo</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">💾 Guardar Cambios</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">🔙 Volver</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<!--Boton Volver-->
+
+@{
+    ViewData["VolverUrl"] = Url.Action("Index", "UsuariosAdmin"); 
+}
+@await Html.PartialAsync("_BotonVolver")
+
+

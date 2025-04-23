@@ -1,0 +1,20 @@
+﻿@model ElibraryManagement.Models.Usuario
+
+@{
+    ViewData["Title"] = "Eliminar Usuario";
+}
+
+<h2>¿Estás seguro de que quieres eliminar este usuario?</h2>
+
+<div>
+    <h4>Usuario: @Model.NombreCompleto</h4>
+    <p>Este usuario será eliminado permanentemente.</p>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdUsuario" />
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+

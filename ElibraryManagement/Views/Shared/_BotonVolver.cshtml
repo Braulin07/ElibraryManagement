@@ -1,0 +1,10 @@
+﻿@* Views/Shared/_BotonVolver.cshtml *@
+@{
+    var url = ViewData["VolverUrl"] as string ?? Url.Action("Index", "Home");
+}
+
+<div class="mt-4">
+    <a href="@url" class="btn btn-outline-primary btn-lg shadow-sm d-inline-flex align-items-center">
+        <i class="bi bi-arrow-left-circle-fill me-2"></i> Volver al Panel de Administración
+    </a>
+</div>

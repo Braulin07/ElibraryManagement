@@ -1,0 +1,76 @@
+﻿@model ElibraryManagement.Models.Libro
+@{
+    ViewData["Title"] = "Añadir Nuevo Libro";
+}
+
+<h2 class="mt-4 mb-3">➕ Añadir Nuevo Libro</h2>
+
+@Html.AntiForgeryToken()
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <strong>¡Error!</strong> Por favor, corrige los siguientes errores:
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <div class="form-group">
+        <label for="Titulo">Título</label>
+        <input asp-for="Titulo" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Autor">Autor</label>
+        <input asp-for="Autor" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Categoria">Categoría</label>
+        <input asp-for="Categoria" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="PortadaFile">Portada</label>
+        <input type="file" class="form-control" id="PortadaFile" name="PortadaFile" accept="image/*" />
+    </div>
+
+    <div class="form-group">
+        <label for="UrlArchivo">URL del libro (opcional)</label>
+        <input asp-for="UrlArchivo" class="form-control" type="url" />
+    </div>
+
+    <div class="form-group">
+        <label for="ArchivoPdf">Subir archivo PDF (opcional)</label>
+        <input type="file" class="form-control" id="ArchivoPdf" name="ArchivoPdf" accept="application/pdf" />
+    </div>
+
+
+    <div class="form-group">
+        <label for="IdInstitucion">Institución</label>
+        <select asp-for="IdInstitucion" class="form-control" required>
+            <option value="">Seleccione una institución</option>
+            @foreach (var institucion in ViewBag.Instituciones as List<ElibraryManagement.Models.Institucione>)
+            {
+                <option value="@institucion.IdInstitucion">@institucion.Nombre</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Libro</button>
+</form>
+
+
+@{
+    ViewData["VolverUrl"] = Url.Action("Index", "LibrosAdmin");
+}
+@await Html.PartialAsync("_BotonVolver")
+
+
+
+

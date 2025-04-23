@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "Panel de Administrador";
+}
+
+<style>
+    .admin-dashboard {
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .admin-title {
+        color: #6c63ff;
+        font-weight: bold;
+    }
+
+    .admin-card {
+        background-color: #6c63ff;
+        color: white;
+        border-radius: 12px;
+        padding: 20px;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .admin-card:hover {
+            background-color: #574ee0;
+            transform: scale(1.02);
+        }
+
+    .admin-link {
+        color: white;
+        text-decoration: none;
+    }
+
+        .admin-link:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<div class="container mt-5">
+    <div class="admin-dashboard">
+        <h2 class="admin-title mb-4">Bienvenido Administrador</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="admin-card">
+                    <h5>📚 Gestionar Libros</h5>
+                    <a href="@Url.Action("Index", "LibrosAdmin")" class="admin-link">Ir a Libros</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="admin-card">
+                    <h5>👤 Ver Usuarios</h5>
+                    <a href="@Url.Action("Index", "UsuariosAdmin")" class="admin-link">Ir a Usuarios</a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="admin-card">
+                    <h5>🏫 Ver Instituciones</h5>
+                    <a href="@Url.Action("Index", "Instituciones")" class="admin-link">Ir a Instituciones</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@model ElibraryManagement.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Panel de Administrador";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">📊 Dashboard</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Libros</h5>
+                    <p class="card-text display-6">@Model.TotalLibros</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Usuarios</h5>
+                    <p class="card-text display-6">@Model.TotalUsuarios</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total de Instituciones</h5>
+                    <p class="card-text display-6">@Model.TotalInstituciones</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            📚 Libros Agregados Recientemente
+        </div>
+        <div class="card-body p-0">
+            @if (Model.LibrosRecientes != null && Model.LibrosRecientes.Any())
+            {
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Institución</th>
+                            <th>Fecha Publicación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var libro in Model.LibrosRecientes)
+                        {
+                            <tr>
+                                <td>@libro.Titulo</td>
+                                <td>@libro.Autor</td>
+                                <td>@libro.IdInstitucionNavigation?.Nombre</td>
+                                <td>@libro.FechaPublicacion</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="p-3">No se encontraron libros recientes.</p>
+            }
+        </div>
+    </div>
+
+</div>
+
+
+

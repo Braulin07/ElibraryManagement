@@ -1,0 +1,190 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <style>
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center/cover no-repeat;
+            color: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .recommendation-card img {
+            max-height: 200px;
+            object-fit: cover;
+        }
+
+        .carousel-item img {
+            max-height: 550px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .testimonial {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .subscribe-section {
+            background: #007bff;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .carousel-control-prev, .carousel-control-next {
+            color: black;
+
+        }
+    </style>
+
+
+    <!-- Hero Principal -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Explora el conocimiento sin límites</h1>
+            <p class="lead">Conecta con bibliotecas e instituciones en un solo lugar</p>
+            <a href="/Login" class="btn btn-light btn-lg mt-3">Inicia tu viaje</a>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="py-5 text-center">
+        <div class="container">
+            <h2 class="mb-4">¿Por qué usar nuestra plataforma?</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="benefit-icon"><i class="fas fa-book-open"></i></div>
+                    <h5>Multibiblioteca</h5>
+                    <p>Accede a colecciones de distintas instituciones desde un solo lugar.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="benefit-icon"><i class="fas fa-laptop"></i></div>
+                    <h5>Acceso 24/7</h5>
+                    <p>Consulta desde cualquier lugar y en cualquier momento.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="benefit-icon"><i class="fas fa-brain"></i></div>
+                    <h5>Recomendaciones Inteligentes</h5>
+                    <p>Recibe sugerencias personalizadas según tus intereses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Libros Poupulares -->
+
+    <section class="mb-5">
+        <h2 class="text-center mb-4">🔥 Libros Populares</h2>
+        <div id="carouselLibros" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="~/images/1984 - George Orwell.jpg" class="d-block w-100" alt="Libro 2">
+                        </div>
+                        <div class="col-md-8 d-flex flex-column justify-content-center">
+                            <h5 class="mb-1">1984 - George Orwell</h5>
+                            <p class="mb-0">Una distopía inquietante sobre vigilancia, censura y totalitarismo.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="~/images/Libro Nacho.jpg" class="d-block w-100" alt="Libro 2">
+                        </div>
+                        <div class="col-md-8 d-flex flex-column justify-content-center">
+                            <h5 class="mb-1">Libro Nacho - Melanio Hernández</h5>
+                            <p class="mb-0">Un libro de lectura inicial para niños de 4 a 13 años que ayuda a aprender a leer y escribir.
+                                El libro contiene actividades divertidas, sílabas, vocales y textos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="~/images/Cien Años de Soledad - Gabriel García Márquez.jpg" class="d-block w-100" alt="Libro 3">
+                        </div>
+                        <div class="col-md-8 d-flex flex-column justify-content-center">
+                            <h5 class="mb-1">Cien Años de Soledad - Gabriel García Márquez</h5>
+                            <p class="mb-0">La historia mágica de la familia Buendía en Macondo.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Controles -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselLibros" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselLibros" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Buscar por Institución -->
+    <section class="py-5 bg-light text-center">
+        <div class="container">
+            <h2 class="mb-3">🔍 Buscar por Institución</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <input type="text" class="form-control mb-3" placeholder="Ej: Biblioteca Nacional">
+                    <button class="btn btn-primary w-100">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suscripción -->
+    <section class="subscribe-section">
+        <div class="container">
+            <h2>📰 Suscríbete para recibir novedades</h2>
+            <p>Recibe recomendaciones, nuevas bibliotecas y noticias directamente en tu correo.</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <input type="email" class="form-control mb-3" placeholder="Tu correo electrónico">
+                    <button class="btn btn-light w-100">Suscribirme</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ÚLTIMAS NOTICIAS -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Últimas Noticias 🗞️</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="p-4 bg-white rounded shadow-sm h-100">
+                        <h5 class="mb-2">📅 Lanzamiento de nueva colección educativa</h5>
+                        <p class="text-muted mb-0">Desde el próximo mes, las bibliotecas educativas estarán integrando una nueva colección de textos actualizados para jóvenes.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-4 bg-white rounded shadow-sm h-100">
+                        <h5 class="mb-2">🔔 Nuevo acuerdo con el Ministerio de Educación</h5>
+                        <p class="text-muted mb-0">Gracias al nuevo convenio, estudiantes de escuelas públicas tendrán acceso prioritario a libros digitales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

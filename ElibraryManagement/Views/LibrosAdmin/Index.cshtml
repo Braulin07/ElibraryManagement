@@ -1,0 +1,72 @@
+﻿@model List<ElibraryManagement.Models.Libro>
+@{
+    ViewData["Title"] = "Gestionar Libros";
+}
+
+<link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<div class="container mt-4">
+    <h2>📚 Gestionar Libros</h2>
+
+    <div class="mb-3">
+        <a asp-action="Create" class="btn btn-success">➕ Añadir Libro</a>
+    </div>
+
+    <table id="tablaLibros" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Categoría</th>
+                <th>Institución</th>
+                <th>Portada</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var libro in Model)
+            {
+                <tr>
+                    <td>@libro.Titulo</td>
+                    <td>@libro.Autor</td>
+                    <td>@libro.Categoria</td>
+                    <td>@libro.IdInstitucionNavigation?.Nombre</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(libro.Portada))
+                        {
+                            <img src="~/portadas/@libro.Portada" alt="Portada" width="60" height="80" />
+                        }
+                        else
+                        {
+                            <span class="text-muted">Sin portada</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@libro.IdLibro" class="btn btn-primary btn-sm">Editar</a>
+                        <a asp-action="Delete" asp-route-id="@libro.IdLibro" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#tablaLibros').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
+            }
+        });
+    });
+</script>
+
+@{
+    ViewData["VolverUrl"] = Url.Action("Index", "Administradores");
+}
+@await Html.PartialAsync("_BotonVolver")
+
+

@@ -1,0 +1,65 @@
+﻿@model ElibraryManagement.Models.Usuario
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
+
+<div class="container mt-4">
+    <h2>➕ Crear Nuevo Usuario</h2>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var modelError in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@modelError.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+
+    <form asp-action="Create" method="post">
+        <div class="form-group mb-3">
+            <label>Nombre Completo</label>
+            <input asp-for="NombreCompleto" class="form-control" required />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Correo Electrónico</label>
+            <input asp-for="CorreoElectronico" class="form-control" type="email" required />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Contraseña</label>
+            <input asp-for="Contrasena" class="form-control" type="password" required />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Fecha de Nacimiento</label>
+            <input asp-for="FechaNacimiento" class="form-control" type="date" required />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Institución</label>
+            <select asp-for="IdInstitucion" class="form-control" required>
+                <option value="">Seleccione una institución</option>
+                @foreach (var institucion in ViewBag.Instituciones as List<ElibraryManagement.Models.Institucione>)
+                {
+                    <option value="@institucion.IdInstitucion">@institucion.Nombre</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Teléfono</label>
+            <input asp-for="Telefono" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Crear Usuario</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">Volver</a>
+    </form>
+</div>
+
+
+
